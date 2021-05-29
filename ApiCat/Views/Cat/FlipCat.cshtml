@@ -1,0 +1,14 @@
+﻿@model ApiCat.Models.CatModel;
+
+<div>MyCat</div>
+@*<img src=@Model.url>*@
+
+@if (Model.CatUrl != null)
+{
+
+    @*<img src="@Model.CatUrl" width="80" height="80" />*@
+<img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.CatUrl))" />
+}
+else
+{ <div>VACOP</div>}
+
