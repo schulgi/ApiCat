@@ -1,11 +1,17 @@
 ﻿
 
-
-<div>My Cat  </div> 
+<div>My Cat  </div>
 
 @using (Html.BeginForm("CallCat", "Cat"))
 {
 
-    <input class="btn btn-default" type="submit" value="Create" />
+    <input class="btn btn-default" type="submit" value="Flip Cat" />
+
+}
+
+@using (Html.BeginForm("UserInfo", "ApplicationUser"))
+{
+
+    <input class="btn btn-default" type="submit" value="User Info" />
 
 }  

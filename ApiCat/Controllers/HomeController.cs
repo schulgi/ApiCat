@@ -28,18 +28,12 @@ namespace ApiCat.Controllers
             if (User.Identity.IsAuthenticated)
             {
 
-                var test = HttpContext.User.Identities;
-            //    var user = await _userManager.GetUserAsync(HttpContext.User);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
 
-                //    await _userManager.AddClaimAsync(user, new Claim("Email", user.Email));
-
-                //    var test = User.Claims.ToList();
+                _applicationUserService.SaveUserLogin(user.Email);
 
 
-                //    _applicationUserService.SaveUserLogin(user.Email);
-
-
-                //    return RedirectToAction("Index", "Cat");
+                return RedirectToAction("Index", "Cat");
             }
             return View();
         }

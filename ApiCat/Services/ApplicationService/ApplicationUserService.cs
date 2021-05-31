@@ -16,10 +16,9 @@ namespace ApiCat.Services.ApplicationService
 
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
-        private readonly IOptions<JwtOptions> _jwtOptions;
         
 
-        public ApplicationUserService(ApplicationDbContext context, IMapper mapper, IOptions<JwtOptions> jwtOptions)
+        public ApplicationUserService(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

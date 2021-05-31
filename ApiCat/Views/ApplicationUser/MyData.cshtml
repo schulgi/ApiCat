@@ -1,0 +1,44 @@
+﻿@model ApiCat.Models.Users.InfoApplicationUser;
+
+
+
+<h1>User indo</h1>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastLogin)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                @Html.DisplayFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.LastLogin)
+            </th>
+        </tr>
+
+    </tbody>
+</table>
+
