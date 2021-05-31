@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using ApiCat.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ApiCat.Services.ApplicationService;
 
 namespace ApiCat.Areas.Identity.Pages.Account
 {
@@ -21,14 +19,14 @@ namespace ApiCat.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IApplicationUserService _applicationUserService;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, 
-            ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager,ILogger<LoginModel> logger,UserManager<ApplicationUser> userManager,IApplicationUserService applicationUserService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _applicationUserService = applicationUserService;
         }
 
         [BindProperty]
@@ -71,7 +69,7 @@ namespace ApiCat.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+        [Authorize]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -85,9 +83,13 @@ namespace ApiCat.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+
+                    _applicationUserService.SaveUserLogin(Input.Email);
+
                     _logger.LogInformation("User logged in.");
 
 
+                    //return RedirectToAction("Index", "Cat");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

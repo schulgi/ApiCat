@@ -1,11 +1,11 @@
 ﻿using ApiCat.Models;
+using ApiCat.Services.ApplicationService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ApiCat.Controllers
@@ -14,19 +14,32 @@ namespace ApiCat.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        private readonly IApplicationUserService _applicationUserService;
+
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager,IApplicationUserService userService)
         {
             _logger = logger;
             _userManager = userManager;
+            _applicationUserService = userService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                _userManager.GetUserAsync
 
-                return RedirectToAction("Index", "Cat");
+                var test = HttpContext.User.Identities;
+            //    var user = await _userManager.GetUserAsync(HttpContext.User);
+
+                //    await _userManager.AddClaimAsync(user, new Claim("Email", user.Email));
+
+                //    var test = User.Claims.ToList();
+
+
+                //    _applicationUserService.SaveUserLogin(user.Email);
+
+
+                //    return RedirectToAction("Index", "Cat");
             }
             return View();
         }

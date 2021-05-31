@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiCat.Services.CatService;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,33 +16,27 @@ namespace ApiCat.Controllers
 {
     public class CatController : Controller
     {
+
+
+        private readonly ICatService _catService;
+
+        public CatController(ICatService catService)
+        {
+            _catService = catService;
+        }
+
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult CallCat()
+        public async Task<IActionResult> CallCat()
         {
-
-           string uri = "https://cataas.com/cat";
-            Image result;
             ApiCat.Models.CatModel model = new Models.CatModel();
 
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
-            httpWebRequest.ContentType = "text/json";
-            httpWebRequest.Method = "GET";
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                Image image = System.Drawing.Image.FromStream(streamReader.BaseStream);
-                image.RotateFlip(RotateFlipType.Rotate180FlipX);
-                model.CatUrl = (byte[])(new ImageConverter()).ConvertTo(image, typeof(byte[]));
-            }
-            httpResponse.Close();
-
-
+            model.CatUrl = await _catService.FlipCat();
+            
             return View("FlipCat", model);
         }
     }
