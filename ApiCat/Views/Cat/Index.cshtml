@@ -1,17 +1,24 @@
 ﻿
-
-<div>My Cat  </div>
+<div style="color:red">My Cat  </div>
 
 @using (Html.BeginForm("CallCat", "Cat"))
 {
 
-    <input class="btn btn-default" type="submit" value="Flip Cat" />
+    <input class="btnStyle btn btn-default" style="border-color:black" type="submit" value="Flip Cat" />
 
 }
 
 @using (Html.BeginForm("UserInfo", "ApplicationUser"))
 {
 
-    <input class="btn btn-default" type="submit" value="User Info" />
+    <input class="btnStyle btn btn-default"style="border-color:black" type="submit" value="User Info" />
 
-}  
+}
+
+@using (Html.BeginForm("CatGif", "Cat"))
+{
+
+    <input class="btnStyle btn btn-default" style="border-color:black" type="submit" value="Gif Cat" />
+
+}
+

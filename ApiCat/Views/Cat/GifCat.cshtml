@@ -1,6 +1,11 @@
 ﻿@model ApiCat.Models.CatModel;
 
-<div>MyCat</div>
+@{
+    ViewData["Title"] = "GifCat";
+}
+
+<h1>GifCat</h1>
+
 @*<img src=@Model.url>*@
 
 @if (Model.CatUrl != null)

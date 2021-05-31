@@ -39,6 +39,20 @@ namespace ApiCat.Controllers
             
             return View("FlipCat", model);
         }
+
+        public async Task<IActionResult> CatGif()
+        {
+            try
+            {
+                Byte[] result = await _catService.CatGif();
+
+                return File(result, "image/jpeg");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
     

@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCat", "ApiCat\ApiCat.csproj", "{49080C54-F247-40F0-9B02-719D1B4FD4F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSolution", "ApiSolution\ApiSolution.csproj", "{19316A87-48E0-455E-BF36-3BD3FECDF33F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSolution", "ApiSolution\ApiSolution.csproj", "{19316A87-48E0-455E-BF36-3BD3FECDF33F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1A2973C-FC98-4463-B21F-B1470DA1D2F9}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

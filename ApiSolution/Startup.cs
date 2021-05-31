@@ -3,6 +3,8 @@ using ApiCat.Models;
 using ApiCat.Models.Users;
 using ApiCat.Services.ApplicationService;
 using ApiCat.Services.CatService;
+using DocumentFormat.OpenXml.Bibliography;
+using JwtSwaggerDemo.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +76,8 @@ namespace ApiSolution
                    ClockSkew = TimeSpan.Zero
                });
 
+            services.AddSwaggerDocumentation();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddAutoMapper(configuration =>
@@ -84,14 +89,15 @@ namespace ApiSolution
 
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddScoped<ICatService, CatService>();
-        }
 
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerDocumentation();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiSolution v1"));
             }
